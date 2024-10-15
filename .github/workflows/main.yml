@@ -1,0 +1,31 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - feature/reactCiProcess
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v2
+
+    - name: Set up Node.js
+      uses: actions/setup-node@v2
+      with:
+        node-version: '20'
+
+    - name: Building Docker image
+      run: docker build -t myfirstapp:v1 .
+
+    - name: Running container
+      run: docker run -d --name "react" -p 3000:3000 myfirstapp:v1
+
+    - name: Showing running container
+      run: docker ps
+
+    - name: Stopping container
+      run: docker stop react
