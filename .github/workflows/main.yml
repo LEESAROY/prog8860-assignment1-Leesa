@@ -5,6 +5,10 @@ on:
     branches:
       - feature/react-ci-process
 
+  pull_request:
+    branches:
+      - main
+
 jobs:
   build:
     runs-on: ubuntu-latest
